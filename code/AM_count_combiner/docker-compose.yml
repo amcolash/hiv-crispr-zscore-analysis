@@ -1,0 +1,7 @@
+version: '2'
+services:
+  counts:
+    build: ./
+    container_name: counts
+    volumes:
+      - ./:/usr/src/app

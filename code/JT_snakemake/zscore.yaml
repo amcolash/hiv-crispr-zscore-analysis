@@ -1,0 +1,15 @@
+channels:
+ - r
+ - conda-forge
+dependencies:
+ - r-metap
+ - r-kernsmooth
+ - r-pheatmap
+ - r-rcolorbrewer
+ - r-viridisLite
+ - r-scales
+ - r-gdata
+ - r-dendextend
+ - r-eulerr
+ - r-gplots
+ - r-nortest

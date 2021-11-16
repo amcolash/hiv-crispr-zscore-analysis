@@ -1,0 +1,23 @@
+configfile: "config.yaml"
+
+rule zscore:
+    input:
+        counts_raw=config["counts_file"]
+    output:
+        zscores="results/test/{experiment}.zscores.txt",
+        metazscore="results/test/{experiment}.metazscore.txt",
+        zscoreplots="results/extras/{experiment}.zscoreplots.pdf",
+        zscoreheatmap="results/extras/{experiment}.zscoreheatmap.pdf"
+    params:
+        prefix="results/test/{experiment}",
+        # treatment=lambda wildcards: ",".join(config["experiments"][wildcards.experiment]["treatment"]),
+        # control=lambda wildcards: ",".join(config["experiments"][wildcards.experiment]["control"])
+
+        treatment=config["treatment"],
+        control=config["control"]
+    log:
+        "logs/extras/{experiment}.zscore.log"
+    conda:
+        "zscore.yaml"
+    script:
+        "zscore.R"

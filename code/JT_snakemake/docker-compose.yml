@@ -1,0 +1,10 @@
+version: '2'
+services:
+  snakemake:
+    build: ./docker
+    image: snakemake/snakemake
+    container_name: snakemake
+    volumes:
+      - ./:/zscore
+    stdin_open: true
+    tty: true
