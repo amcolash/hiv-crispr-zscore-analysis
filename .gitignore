@@ -1,6 +1,13 @@
 input*/
 output*/
 
+*.zip
+*.csv
+*.txt
+*.xlsx
+
+Terminal output/
+
 code/JT_snakemake/.snakemake/
 code/JT_snakemake/logs/
 code/JT_snakemake/results/
@@ -10,3 +17,5 @@ code/PR_python/output/
 code/AM_count_combiner/counts_all.txt
 code/PR_python/counts_all.txt
 code/PR_python/process
+
+.DS_Store
