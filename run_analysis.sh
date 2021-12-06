@@ -28,6 +28,8 @@ fi
 # Copy combined counts to python/snakemake locations
 mkdir -p output_counts
 mkdir -p code/JT_snakemake/results/count
+mkdir -p code/JT_snakemake/results/extra
+mkdir -p code/JT_snakemake/results/test
 
 cp code/AM_count_combiner/counts_all.txt output_counts
 cp code/AM_count_combiner/counts_all.txt code/PR_python/
