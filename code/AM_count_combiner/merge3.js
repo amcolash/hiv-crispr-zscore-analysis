@@ -2,6 +2,8 @@
 const fs = require('fs');
 const { join } = require('path');
 
+const { countThreshold, thresholdExclusions } = require('./config');
+
 // Mapping of excel dates errors to valid names
 const dateErrorMapping = {
   MARCH: '-Mar',
@@ -167,6 +169,13 @@ library.forEach((row) => {
     let excludeRow = false;
     headerArray.forEach((h) => {
       if (!row[h]) excludeRow = true;
+    });
+
+    thresholdExclusions.forEach((c) => {
+      if (row[c] < countThreshold) {
+        excludeRow = true;
+        console.log(`Removing row since it does not meet threshold: ${row[headerArray[0]]}, [${c}: ${row[c]}]`);
+      }
     });
 
     // If all data needed is present, add the row to final data

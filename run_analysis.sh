@@ -38,6 +38,7 @@ cp code/AM_count_combiner/counts_all.txt code/JT_snakemake/results/count/
 # Copy python/snakemake configs
 cp config_snakemake.yaml code/JT_snakemake/config.yaml
 cp config_python.py code/PR_python/config.py
+cp config_combiner.js code/AM_count_combiner/config.js
 
 # Make output directories if needed
 mkdir -p output_python
