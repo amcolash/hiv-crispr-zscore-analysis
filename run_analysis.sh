@@ -3,6 +3,9 @@
 # crash on error
 set -e
 
+# Set input folder
+INPUT_FOLDER="input/LAI_TKOV3"
+
 # Optionally enable / disable analysis
 RUN_COMBINER=true
 RUN_PYTHON=true
@@ -15,7 +18,7 @@ pushd "$SCRIPT_DIR" > /dev/null
 # Remove old count files and copy over new count files
 mkdir -p code/AM_count_combiner/input
 rm -f code/AM_count_combiner/input/*
-cp input_counts/* code/AM_count_combiner/input
+cp "$INPUT_FOLDER"/data/* code/AM_count_combiner/input
 
 if [[ $RUN_COMBINER == true ]]; then
   # Run the count combiner
@@ -34,9 +37,9 @@ cp code/AM_count_combiner/counts_all.txt code/PR_python/
 cp code/AM_count_combiner/counts_all.txt code/JT_snakemake/results/count/
 
 # Copy python/snakemake configs
-cp config_snakemake.yaml code/JT_snakemake/config.yaml
-cp config_python.py code/PR_python/config.py
-cp config_combiner.js code/AM_count_combiner/config.js
+cp "$INPUT_FOLDER/config/config_snakemake.yaml" code/JT_snakemake/config.yaml
+cp "$INPUT_FOLDER/config/config_python.py" code/PR_python/config.py
+cp "$INPUT_FOLDER/config/config_combiner.js" code/AM_count_combiner/config.js
 
 # Make output directories if needed
 mkdir -p output_python
@@ -59,7 +62,7 @@ if [[ $RUN_SNAKEMAKE == true ]]; then
   # Run snakemake code
   pushd code/JT_snakemake > /dev/null
   echo Running Snakemake
-  
+
   ./run.sh -r
 
   # Copy snakemake output
