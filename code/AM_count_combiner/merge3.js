@@ -58,7 +58,7 @@ files.forEach((f) => {
             cols.forEach((c, j) => {
               if (c.indexOf(m[1]) !== -1) {
                 cols[j] = m[0] + c.replace(m[1], '');
-                // console.log(c, cols);
+                //console.log(c, cols);
               }
             });
             break;
@@ -118,7 +118,7 @@ libraryFiles.forEach((f) => {
             cols.forEach((c, j) => {
               if (c.indexOf(m[1]) !== -1) {
                 cols[j] = m[0] + c.replace(m[1], '');
-                // console.log(c, cols);
+                //console.log(c, cols);
               }
             });
             break;
