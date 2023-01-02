@@ -1,0 +1,7 @@
+version: '2'
+services:
+  cols2rows:
+    build: ./
+    container_name: cols2rows
+    volumes:
+      - ./:/usr/src/app

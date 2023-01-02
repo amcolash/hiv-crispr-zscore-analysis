@@ -7,4 +7,4 @@ WORKDIR /usr/src/app
 # Copy code over to docker image
 COPY ./*.js ./
 
-CMD [ "node", "merge3.js" ]
+CMD [ "node", "cols.js" ]
