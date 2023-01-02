@@ -8,7 +8,6 @@ INPUT_FOLDER="input/HIVDEP"
 
 # Optionally enable / disable analysis
 RUN_COMBINER=true
-RUN_PYTHON=false
 RUN_SNAKEMAKE=true
 
 # start from where the script lives
@@ -28,37 +27,21 @@ if [[ $RUN_COMBINER == true ]]; then
   popd > /dev/null
 fi
 
-# Copy combined counts to python/snakemake locations
+# Copy combined counts to snakemake locations
 mkdir -p output_counts
 mkdir -p code/JT_snakemake/results/count
 mkdir -p code/JT_snakemake/results/extra
 mkdir -p code/JT_snakemake/results/test
 
 cp code/AM_count_combiner/counts_all.txt output_counts
-cp code/AM_count_combiner/counts_all.txt code/PR_python/
 cp code/AM_count_combiner/counts_all.txt code/JT_snakemake/results/count/
 
-# Copy python/snakemake configs
+# Copy configs
 cp "$INPUT_FOLDER/config/config_snakemake.yaml" code/JT_snakemake/config.yaml
-cp "$INPUT_FOLDER/config/config_python.py" code/PR_python/config.py
 cp "$INPUT_FOLDER/config/config_combiner.js" code/AM_count_combiner/config.js
 
 # Make output directories if needed
-mkdir -p output_python
 mkdir -p output_snakemake
-
-if [[ $RUN_PYTHON == true ]]; then
-  # Run python code
-  pushd code/PR_python > /dev/null
-  echo Running Python
-  mkdir -p output
-  python3 process.py
-
-  # Copy python output
-  echo Copying Python output files
-  cp output/* ../../output_python
-  popd > /dev/null
-fi
 
 if [[ $RUN_SNAKEMAKE == true ]]; then
   # Run snakemake code
