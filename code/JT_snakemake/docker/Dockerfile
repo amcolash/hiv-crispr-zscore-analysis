@@ -1,5 +1,5 @@
-# Use snakemake base image
-FROM snakemake/snakemake
+# Use snakemake base image (version 7)
+FROM snakemake/snakemake:v7.18.2
 
 # Install yq
 COPY yq_linux_amd64 /usr/bin/yq

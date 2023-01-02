@@ -10,7 +10,7 @@ process() {
 
   # Run snakemake for new file
   snakemake --unlock
-  snakemake -j1 --use-conda --quiet results/test/$FILE
+  snakemake -j1 --use-conda --quiet=all results/test/$FILE
 }
 
 run() {

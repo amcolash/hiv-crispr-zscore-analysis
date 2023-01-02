@@ -4,11 +4,11 @@
 set -e
 
 # Set input folder
-INPUT_FOLDER="input/LAI_TKOV3"
+INPUT_FOLDER="input/HIVDEP"
 
 # Optionally enable / disable analysis
 RUN_COMBINER=true
-RUN_PYTHON=true
+RUN_PYTHON=false
 RUN_SNAKEMAKE=true
 
 # start from where the script lives

@@ -1,5 +1,5 @@
-# Use node, version 14 so that we get worker threads
-FROM mhart/alpine-node:14
+# Use node v18
+FROM node:18-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
