@@ -3,7 +3,11 @@
 This code is initially from [John Poirier](john.poirier@nyulangone.org) and his team. This R code is the main portion of the z-score
 analysis pipeline. The input counts files are used to calculate z-scores (Add link about what this means).
 
-No license was attached to this code, but has been shared/modified with his permission.
+The original z-score file exists here and is named `zscore-orig.R`. A slightly modified version is used in the z-score pipeline analysis.
+The modified version includes comments, removal of unused code, and a few small modifications that made the code run successfully
+(since no prior documentation was provided).
+
+No license was attached to this code, but has been shared/modified with JT's permission.
 
 ## Required Input Files
 

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# crash on error
-set -e
+### Configuration Section ###
 
 # Set input folder
 INPUT_FOLDER="input/HIVDEP"
@@ -9,6 +8,11 @@ INPUT_FOLDER="input/HIVDEP"
 # Optionally enable / disable analysis
 RUN_COMBINER=true
 RUN_SNAKEMAKE=true
+
+### Main Script Section ###
+
+# crash on error
+set -e
 
 # start from where the script lives
 SCRIPT_DIR=$(cd "$(dirname "$0")"; pwd)
@@ -28,12 +32,12 @@ if [[ $RUN_COMBINER == true ]]; then
 fi
 
 # Copy combined counts to snakemake locations
-mkdir -p output_counts
+mkdir -p output/counts
 mkdir -p code/JT_snakemake/results/count
 mkdir -p code/JT_snakemake/results/extras
 mkdir -p code/JT_snakemake/results/test
 
-cp code/AM_count_combiner/counts_all.txt output_counts
+cp code/AM_count_combiner/counts_all.txt output/counts
 cp code/AM_count_combiner/counts_all.txt code/JT_snakemake/results/count/
 
 # Copy configs
@@ -41,7 +45,7 @@ cp "$INPUT_FOLDER/config/config_snakemake.yaml" code/JT_snakemake/config.yaml
 cp "$INPUT_FOLDER/config/config_combiner.js" code/AM_count_combiner/config.js
 
 # Make output directories if needed
-mkdir -p output_snakemake
+mkdir -p output/snakemake
 
 if [[ $RUN_SNAKEMAKE == true ]]; then
   # Run snakemake code
@@ -52,8 +56,8 @@ if [[ $RUN_SNAKEMAKE == true ]]; then
 
   # Copy snakemake output
   echo Copying Snakemake output files
-  cp results/extras/* ../../output_snakemake
-  cp results/test/* ../../output_snakemake
+  cp results/extras/* ../../output/snakemake
+  cp results/test/* ../../output/snakemake
   popd > /dev/null
 fi
 

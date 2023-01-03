@@ -1,6 +1,8 @@
 # Count Combiner
 
-This code was written by [Andrew McOlash](https://github.com/amcolash/) is a pre-processing stage of the analysis pipeline before the actual z-score analysis is run. The purpose of this script is to combine MAGeCK counts files along with a library file into a single counts file. This file in then inputted into the snakemake pipeline by JT Porrier for the z-score analysis.
+This code was written by [Andrew McOlash](https://github.com/amcolash/) is a pre-processing stage of the analysis pipeline before the actual
+z-score analysis is run. The purpose of this script is to combine MAGeCK counts files along with a library file into a single counts file.
+This file in then inputted into the snakemake pipeline by JT Porrier for the z-score analysis.
 
 ## Required Input Files
 
@@ -33,7 +35,8 @@ CHOPCHOP_vm0003,CCACAGTGATGGTCCGAGCG,AARS1
 ...
 ```
 
-- [Optional] A configuration file can be added to the root of this code directory. This configuration allows filtering out low counts from specified columns when they do not meet a threshold.
+- [Optional] A configuration file can be added to the root of this code directory. This configuration allows filtering out low counts from
+  specified columns when they do not meet a threshold.
 
 > config.js [Optional]
 
@@ -52,7 +55,8 @@ module.exports = { countThreshold, thresholdExclusions };
 
 ### Unless you are modifying this code as a developer, it is not recommended to manually run this script.
 
-This script is run during the z-score analysis pipeline and can be run most easily using [Docker](https://www.docker.com/). This is already a prerequisite of running the main analysis pipeline, so there is no additional setup required.
+This script is run during the z-score analysis pipeline and can be run most easily using [Docker](https://www.docker.com/). This is already
+a prerequisite of running the main analysis pipeline, so there is no additional setup required.
 
 Open a terminal, move into this code directory and run the script via docker.
 
