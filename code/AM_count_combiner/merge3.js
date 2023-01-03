@@ -2,7 +2,16 @@
 const fs = require('fs');
 const { join } = require('path');
 
-const { countThreshold, thresholdExclusions } = require('./config');
+let countThreshold = 0;
+let thresholdExclusions = [];
+
+// Optionally load in the config if it exists. If not, ignore thresholds
+if (fs.existsSync('./config.js')) {
+  console.log('Using configuration file: config.js');
+  const config = require('./config');
+  countThreshold = config.countThreshold;
+  thresholdExclusions = config.thresholdExclusions;
+}
 
 // Mapping of excel dates errors to valid names
 const dateErrorMapping = {
