@@ -43,7 +43,7 @@ This script can be run most easily using [Docker](https://www.docker.com/). This
 
 Running the script is simple. Open a terminal, move into this code directory and run the script via docker.
 
-```
+```bash
 $ cd hiv-crispr-zscore-analysis/code/AM_cols2rows
 $ docker-compose up --build
 ```

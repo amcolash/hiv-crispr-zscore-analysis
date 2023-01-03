@@ -19,3 +19,6 @@ code/PR_python/counts_all.txt
 code/PR_python/process
 
 .DS_Store
+
+code/AM_count_combiner/config.js
+code/JT_snakemake/config.yaml
