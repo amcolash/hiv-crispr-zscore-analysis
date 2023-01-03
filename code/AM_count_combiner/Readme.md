@@ -67,7 +67,7 @@ The script will output a single file named `counts_all.txt`. Each row will conta
 
 > counts_all.txt
 
-```csv
+```tsv
 sgRNA	Gene	Experiment1R1.fastq	Experiment1R2.fastq	Experiment2R1.fastq	Experiment2R2.fastq	Experiment3R1.fastq	Experiment3R2.fastq	Experiment4R1.fastq	Experiment4R2.fastq	Experiment5R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment5R2.fastq	Experiment6R1.fastq	Experiment6R2.fastq	Experiment7R1.fastq	Experiment7R2.fastq	Experiment8R1.fastq	Experiment8R2.fastq	Experiment9R1.fastq	Experiment9R2.fastq	Experiment10R1.fastq	Experiment10R2.fastq
 CHOPCHOP_vm0001	AARS1	466	558	334	352	462	480	448	394	1095	970	1312	1503	721	2680	2506	2642	2446	1757	978	2581	2825	1494	2287	2647
 CHOPCHOP_vm0002	AARS1	3968	4254	2722	2486	2667	2675	2787	2628	6412	6115	8187	9608	18167	16482	17451	17582	16538	15962	16538	16441	15858	13056	15497	17063
