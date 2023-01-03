@@ -1,12 +1,12 @@
 # Count Combiner
 
-This code was written by [Andrew McOlash](https://github.com/amcolash/) is a pre-processing stage of the analysis pipeline before the actual
+This code was written by [Andrew McOlash](https://github.com/amcolash/) and is a pre-processing stage of the analysis pipeline before the actual
 z-score analysis is run. The purpose of this script is to combine MAGeCK counts files along with a library file into a single counts file.
-This file in then inputted into the snakemake pipeline by JT Porrier for the z-score analysis.
+This file in then inputted into the z-score snakemake pipeline written by JT Poirier for the z-score analysis.
+
+### Please refer to the main documentation if using the z-score pipeline analysis. This documentation is also listed here for completeness and informational purposes for anyone aiming to use this subset of code separately from the z-score pipeline.
 
 ## Required Input Files
-
-### These files are automatically copied when using the z-score analysis pipeline. Please refer to the pipeline documentation for information about that input.
 
 - Create a directory called `input/` in this folder.
 - Add all `.txt` counts files (can be renamed from `.csv` to `.txt` if needed)
@@ -14,7 +14,7 @@ This file in then inputted into the snakemake pipeline by JT Porrier for the z-s
 > example-counts.txt
 
 ```tsv
-sgRNA	Gene	Experiment1R1.fastq	Experiment1R2.fastq	Experiment2R1.fastq	Experiment2R2.fastq	Experiment3R1.fastq	Experiment3R2.fastq	Experiment4R1.fastq	Experiment4R2.fastq	Experiment5R1.fastq	Experiment5R2.fastq
+sgRNA	Gene	Expt1_vrna_R1.fastq Expt1_vrna_R2.fastq Expt2_vrna_R1.fastq Expt2_vrna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq
 CHOPCHOP_vm1334	SYMPK	842	843	604	586	578	574	561	473
 chr14_34904432_34904451_SPTSSA_plus	SPTSSA	385	368	374	401	366	561	512	433
 GUIDES_vm0477	GATAD2B	489	523	437	457	370	393	352	324
@@ -44,8 +44,8 @@ CHOPCHOP_vm0003,CCACAGTGATGGTCCGAGCG,AARS1
 // Counts less than (not including) this value will be excluded
 const countThreshold = 10;
 
-// Count exclusion will only happen for these columns (the entire row will be excluded)
-const thresholdExclusions = ['Experiment1R1', 'Experiment1R2'];
+// Count exclusion checks only happen for the specified columns below. Any count lower than the threshold in these columns will exclude the guide from the downstream zscore analysis for each counts column, not only the gdna columns
+const thresholdExclusions = ['Expt1_gdna_R1', 'Expt1_gdna_R2'];
 
 // Make these values available to the main script
 module.exports = { countThreshold, thresholdExclusions };
@@ -72,10 +72,10 @@ The script will output a single file named `counts_all.txt`. Each row will conta
 > counts_all.txt
 
 ```tsv
-sgRNA	Gene	Experiment1R1.fastq	Experiment1R2.fastq	Experiment2R1.fastq	Experiment2R2.fastq	Experiment3R1.fastq	Experiment3R2.fastq	Experiment4R1.fastq	Experiment4R2.fastq	Experiment5R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment5R2.fastq	Experiment6R1.fastq	Experiment6R2.fastq	Experiment7R1.fastq	Experiment7R2.fastq	Experiment8R1.fastq	Experiment8R2.fastq	Experiment9R1.fastq	Experiment9R2.fastq	Experiment10R1.fastq	Experiment10R2.fastq
-CHOPCHOP_vm0001	AARS1	466	558	334	352	462	480	448	394	1095	970	1312	1503	721	2680	2506	2642	2446	1757	978	2581	2825	1494	2287	2647
-CHOPCHOP_vm0002	AARS1	3968	4254	2722	2486	2667	2675	2787	2628	6412	6115	8187	9608	18167	16482	17451	17582	16538	15962	16538	16441	15858	13056	15497	17063
-CHOPCHOP_vm0003	AARS1	150	189	299	305	257	234	325	278	585	737	929	992	1570	1699	2827	1608	1854	1948	748	1715	1556	1260	1301	1791
+sgRNA	Gene	Expt1_vrna_R1.fastq Expt1_vrna_R2.fastq Expt2_vrna_R1.fastq Expt2_vrna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq
+CHOPCHOP_vm0001	AARS1	466	558	334	352	462	480	448	394
+CHOPCHOP_vm0002	AARS1	3968  4254	2722	2486	2667	2675	2787	2628
+CHOPCHOP_vm0003	AARS1	150	189	299	305	257	234	325	278
 
 ...
 ```

@@ -1,6 +1,6 @@
 # hiv-crispr-zscore-analysis
 
-This repository contains the code that was used to run z-score analysis for Montoya et al. 2023 [https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1](https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1). There is additional code that was used in a post-processing stage that helped with preparing figures for the paper, but is not used in the z-score analysis.
+This repository contains the code that was used to run z-score analyses for Montoya et al. 2023 [https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1](https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1). There is additional code that was used in a post-processing stage that helped with preparing figures for the paper, but is not used for the z-score analysis.
 
 ## Processing Scripts
 
@@ -63,7 +63,7 @@ Make an `input/` folder inside of the code directory. Inside, make 2 more direct
 > input/data/example-counts.txt
 
 ```tsv
-sgRNA	Gene	Experiment1R1.fastq	Experiment1R2.fastq	Experiment2R1.fastq	Experiment2R2.fastq	Experiment3R1.fastq	Experiment3R2.fastq	Experiment4R1.fastq	Experiment4R2.fastq	Experiment5R1.fastq	Experiment5R2.fastq
+sgRNA	Gene	Expt1_vrna_R1.fastq Expt1_vrna_R2.fastq Expt2_vrna_R1.fastq Expt2_vrna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq
 CHOPCHOP_vm1334	SYMPK	842	843	604	586	578	574	561	473
 chr14_34904432_34904451_SPTSSA_plus	SPTSSA	385	368	374	401	366	561	512	433
 GUIDES_vm0477	GATAD2B	489	523	437	457	370	393	352	324
@@ -97,25 +97,25 @@ Create a file inside of `input/config` named `config_snakemake.yaml`. This file 
 counts_file: results/count/counts_all.txt
 
 # Which columns in the counts file are treatments
-treatment: Experiment1R1.fastq,Experiment1R2.fastq,Experiment2R1.fastq,Experiment2R2.fastq
+treatment: Expt1_vrna_R1.fastq,Expt1_vrna_R2.fastq,Expt2_vrna_R1.fastq,Expt2_vrna_R2.fastq
 
-# Which columns in the counts file are controls
-control: Experiment3R1.fastq,Experiment3R2.fastq,Experiment4R1.fastq,Experiment4R2.fastq
+# Which columns in the counts file are controls. Match the treatment replicates above with control replicates you want to normalize to below.
+control: Expt1_gdna_R1.fastq,Expt1_gdna_R2.fastq,Expt1_gdna_R1.fastq,Expt1_gdna_R2.fastq
 
 # Which column in the counts file is plasmids
-plasmid: Experiment5R1.fastq
+plasmid: plasmidlibrary.fastq
 
-# Number of sgrnas
+# Number of sgrnas per gene in library
 sgrnas:
-  n: 4
+  n: 8
 
 # Heatmap configuration
 heatmapCount: 50
 heatmapMin: -4
 heatmapMax: 4
 
-# File to output results to
-output_file: nextseqArticuno_20201201_34.fastq.zscores.txt
+# File to output results to. Name as you see fit.
+output_file: Expt1_Expt2.zscores.txt
 ```
 
 ## Running Analysis

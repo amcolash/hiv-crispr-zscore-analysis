@@ -1,17 +1,16 @@
 # Z-Score Calculations in R
 
-This code is initially from [John Poirier](john.poirier@nyulangone.org) and his team. This R code is the main portion of the z-score
-analysis pipeline. The input counts files are used to calculate z-scores (Add link about what this means).
+This code is initially from [Dr. John T. Poirier](john.poirier@nyulangone.org) and his team. This R code is the main portion of the z-score
+analysis pipeline. The input counts files are used to calculate z-scores as is described [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7796900/): PMID: 33382968
 
 The original z-score file exists here and is named `zscore-orig.R`. A slightly modified version is used in the z-score pipeline analysis.
-The modified version includes comments, removal of unused code, and a few small modifications that made the code run successfully
-(since no prior documentation was provided).
+The modified version includes comments, removal of unused code, and a few small modifications that made the code run successfully.
 
 No license was attached to this code, but has been shared/modified with JT's permission.
 
-## Required Input Files
+### Please refer to the main documentation if using the z-score pipeline analysis. This documentation is also listed here for completeness and informational purposes for anyone aiming to use this subset of code separately from the z-score pipeline.
 
-### These files are automatically copied from the count combiner when using the z-score analysis pipeline. Please refer to the pipeline documentation for information about that input.
+## Required Input Files
 
 - Create a directory `results/count` in this folder.
 - Add a `.txt` counts file (can be renamed from `.csv` to `.txt` if needed). This is the count file that will be referenced from your
@@ -20,10 +19,10 @@ No license was attached to this code, but has been shared/modified with JT's per
 > counts_all.txt
 
 ```tsv
-sgRNA	Gene	Experiment1R1.fastq	Experiment1R2.fastq	Experiment2R1.fastq	Experiment2R2.fastq	Experiment3R1.fastq	Experiment3R2.fastq	Experiment4R1.fastq	Experiment4R2.fastq	Experiment5R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment1R1.fastq	Experiment5R2.fastq	Experiment6R1.fastq	Experiment6R2.fastq	Experiment7R1.fastq	Experiment7R2.fastq	Experiment8R1.fastq	Experiment8R2.fastq	Experiment9R1.fastq	Experiment9R2.fastq	Experiment10R1.fastq	Experiment10R2.fastq
-CHOPCHOP_vm0001	AARS1	466	558	334	352	462	480	448	394	1095	970	1312	1503	721	2680	2506	2642	2446	1757	978	2581	2825	1494	2287	2647
-CHOPCHOP_vm0002	AARS1	3968	4254	2722	2486	2667	2675	2787	2628	6412	6115	8187	9608	18167	16482	17451	17582	16538	15962	16538	16441	15858	13056	15497	17063
-CHOPCHOP_vm0003	AARS1	150	189	299	305	257	234	325	278	585	737	929	992	1570	1699	2827	1608	1854	1948	748	1715	1556	1260	1301	1791
+sgRNA	Gene	Expt1_vrna_R1.fastq Expt1_vrna_R2.fastq Expt2_vrna_R1.fastq Expt2_vrna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq Expt1_gdna_R1.fastq Expt1_gdna_R2.fastq
+CHOPCHOP_vm0001	AARS1	466	558	334	352	462	480	448	394
+CHOPCHOP_vm0002	AARS1	3968	4254	2722	2486	2667	2675	2787	2628
+CHOPCHOP_vm0003	AARS1	150	189	299	305	257	234	325	278
 
 ...
 ```
@@ -33,31 +32,31 @@ CHOPCHOP_vm0003	AARS1	150	189	299	305	257	234	325	278	585	737	929	992	1570	1699	
 > config.yaml
 
 ```yaml
-# Config file for all of the values to change
+# Z-score analysis configuration file
 
 # Output file
 counts_file: results/count/counts_all.txt
 
 # Which columns in the counts file are treatments
-treatment: Experiment1R1.fastq,Experiment1R2.fastq,Experiment2R1.fastq,Experiment2R2.fastq
+treatment: Expt1_vrna_R1.fastq,Expt1_vrna_R2.fastq,Expt2_vrna_R1.fastq,Expt2_vrna_R2.fastq
 
-# Which columns in the counts file are controls
-control: Experiment3R1.fastq,Experiment3R2.fastq,Experiment4R1.fastq,Experiment4R2.fastq
+# Which columns in the counts file are controls. Match the treatment replicates above with control replicates you want to normalize to below.
+control: Expt1_gdna_R1.fastq,Expt1_gdna_R2.fastq,Expt1_gdna_R1.fastq,Expt1_gdna_R2.fastq
 
 # Which column in the counts file is plasmids
-plasmid: Experiment5R1.fastq
+plasmid: plasmidlibrary.fastq
 
-# Number of sgrnas
+# Number of sgrnas per gene in library
 sgrnas:
-  n: 4
+  n: 8
 
 # Heatmap configuration
 heatmapCount: 50
 heatmapMin: -4
 heatmapMax: 4
 
-# File to output results to
-output_file: nextseqArticuno_20201201_34.fastq.zscores.txt
+# File to output results to. Name as you see fit.
+output_file: Expt1_Expt2.zscores.txt
 ```
 
 ## Script Usage
@@ -84,7 +83,7 @@ The script will output files based on your configuration of `output_file`. The f
 > [output].zscores.txt
 
 ```tsv
-"Experiment1R1.fastq"	"Experiment1R2.fastq"	"Experiment2R1.fastq"	"Experiment2R2.fastq"
+"Expt1_vrna_R1.fastq"	"Expt1_vrna_R2.fastq"	"Expt2_vrna_R1.fastq"	"Expt2_vrna_R2.fastq"
 "AARS1"	0.276442868675943	-0.163123730468512	0.148261964751478	-0.526333484040557
 "ABCB6"	-0.00651663688418705	0.782287910700647	0.747356565769643	0.231045089552426
 "ABCD1"	0.0151032690760687	0.516867531180449	0.514646277119141	0.664458511402256
