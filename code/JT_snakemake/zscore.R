@@ -23,7 +23,6 @@ control<-make.names(unlist(strsplit(snakemake@params$control,",")))
 # print date to make sure output updates
 cat(format(Sys.time(), "%a %b %d %X %Y"), '\n\n')
 
-# Trim down some columns?
 count.matrix<-counts[,3:ncol(counts)]
 # Run normalization: log2((x / sum(x) * 1E6) + 1)
 counts.normalized<-apply(count.matrix,2,function(x){log2((x/sum(x)*1E6)+1)})
@@ -34,9 +33,6 @@ plasmid.sd<-sd(counts.normalized[,plasmid])
 plasmid.mean<-mean(counts.normalized[,plasmid])
 # Make table of gene names from genes in count data
 tab<-table(counts$Gene)
-
-# Tries to get rid of bad data, but crashes since there is not missing data?
-# counts$Gene<-droplevels(counts$Gene)
 
 counts.lfc<-apply(counts.normalized,2,function(x){x-counts.normalized[,plasmid]})[,colnames(counts.normalized)!=plasmid]
 treatment.lfc<-counts.lfc[,treatment]
@@ -64,7 +60,7 @@ for(i in 1:ncol(treatment.lfc)){
 	u<-mean(data$r)
 	s<-sd(data$r)
 	sgrnas.n<-snakemake@config$sgrnas$n
-	z<-(x-u)/(s/sqrt(sgrnas.n)) # check this function
+	z<-(x-u)/(s/sqrt(sgrnas.n))
 	p<-2*pnorm(-abs(z))
 	fdr<-p.adjust(p)
 	gene<-data.frame(Gene=names(z),z=z,p=p,fdr=fdr)
