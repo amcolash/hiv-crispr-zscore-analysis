@@ -4,7 +4,7 @@ This repository contains the code that was used to run z-score analyses for Mont
 
 ## Processing Scripts
 
-There are three pieces of code inside of this repository. Two of them are used in the main z-score processing and the last helped with post-processing the z-score data for figures in the paper.
+There are three pieces of code inside of this repository. Two of them are used in the main z-score processing and the last helped with post-processing the z-score data for figures in the paper. Unless otherwise noted, most of the code and infrastructure here was written by [Andrew McOlash](https://github.com/amcolash).
 
 ### Count Combiner
 
