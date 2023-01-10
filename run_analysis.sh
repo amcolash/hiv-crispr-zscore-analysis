@@ -12,7 +12,16 @@ RUN_SNAKEMAKE=true
 ### Main Script Section ###
 
 # crash on error
-set -e
+set -eE
+
+# Trap errors
+trap handle_error ERR
+
+# Handler for errors
+function handle_error() {
+  echo
+  echo "*** An error occured. Please read the logs and retry. The data in the output folder may be innacurate! ***"
+}
 
 # start from where the script lives
 SCRIPT_DIR=$(cd "$(dirname "$0")"; pwd)
