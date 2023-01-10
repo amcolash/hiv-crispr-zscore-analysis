@@ -3,7 +3,7 @@
 ### Configuration Section ###
 
 # Set input folder
-INPUT_FOLDER="input/HIVDEP"
+INPUT_FOLDER="input/Terry"
 
 # Optionally enable / disable analysis
 RUN_COMBINER=true
@@ -40,9 +40,9 @@ mkdir -p code/JT_snakemake/results/test
 cp code/AM_count_combiner/counts_all.txt output/counts
 cp code/AM_count_combiner/counts_all.txt code/JT_snakemake/results/count/
 
-# Copy configs
-cp "$INPUT_FOLDER/config/config_snakemake.yaml" code/JT_snakemake/config.yaml
-cp "$INPUT_FOLDER/config/config_combiner.js" code/AM_count_combiner/config.js
+# Copy configs, ignore errors
+cp "$INPUT_FOLDER/config/config_snakemake.yaml" code/JT_snakemake/config.yaml | true
+cp "$INPUT_FOLDER/config/config_combiner.js" code/AM_count_combiner/config.js | true
 
 # Make output directories if needed
 mkdir -p output/snakemake
