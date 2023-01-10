@@ -1,10 +1,10 @@
 # hiv-crispr-zscore-analysis
 
-This repository contains the code that was used to run z-score analyses for Montoya et al. 2023 [https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1](https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1). There is additional code that was used in a post-processing stage that helped with preparing figures for the paper, but is not used for the z-score analysis.
+This repository contains the code that was used to run z-score analyses for Montoya et al. 2023 [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1). There is additional code that was used in a post-processing stage that helped with preparing figures for the paper, but is not used for the z-score analysis.
 
 ## Processing Scripts
 
-There are three pieces of code inside of this repository. Two of them are used in the main z-score processing and the last helped with post-processing the z-score data for figures in the paper.
+There are three pieces of code inside of this repository. Two of them are used in the main z-score processing and the last helped with post-processing the z-score data for figures in the paper. Unless otherwise noted, most of the code and infrastructure here was written by [Andrew McOlash](https://github.com/amcolash).
 
 ### Count Combiner
 
