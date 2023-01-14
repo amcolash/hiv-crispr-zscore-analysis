@@ -14,7 +14,14 @@ process() {
 }
 
 run() {
-  docker-compose build --no-rm
+  if [[ $(uname -m) == "arm64" ]]; then
+    echo Bulding arm64 docker image
+    docker-compose build --no-rm --build-arg IMAGE=amcolash/snakemake
+  else
+    echo Building x86 docker image
+    docker-compose build --no-rm
+  fi
+
   docker-compose run snakemake bash -c "./run.sh"
 }
 
