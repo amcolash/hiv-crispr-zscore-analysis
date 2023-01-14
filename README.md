@@ -36,7 +36,7 @@ You will need to WSL to use a virtual linux container. This allows running the c
 
 ### Installing Docker
 
-- Mac OS: Install docker desktop following these [instructions](https://docs.docker.com/desktop/install/mac-install/).
+- Mac OS: Install docker desktop following these [instructions](https://docs.docker.com/desktop/install/mac-install/). Make sure you install the proper version! Check if you have an M1 or M2 chip [Apple Menu -> About this Mac]. If you do, install the apple silicon version of docker instead of the intel one.
 
 - Linux: install docker desktop following these [instructions](https://docs.docker.com/desktop/install/linux-install/).
 
