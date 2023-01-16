@@ -3,7 +3,7 @@
 ### Configuration Section ###
 
 # Set input folder
-INPUT_FOLDER="input/Terry"
+INPUT_FOLDER="input/Analysis 4 - norm to 10.6 only TH files"
 
 # Optionally enable / disable analysis
 RUN_COMBINER=true
@@ -37,11 +37,14 @@ mkdir -p code/AM_count_combiner/input
 rm -f code/AM_count_combiner/input/*
 cp "$INPUT_FOLDER"/data/* code/AM_count_combiner/input
 
-  # Run the count combiner
-  pushd code/AM_count_combiner > /dev/null
-  echo Combining Count Files
-  docker-compose up --build
-  popd > /dev/null
+# Run the count combiner
+pushd code/AM_count_combiner > /dev/null
+echo Combining Count Files
+docker-compose up --build
+popd > /dev/null
+
+# Clean existing snakemake output for a clean run
+rm -rf code/JT_snakemake/results
 
 # Make snakemake input dirs
 mkdir -p code/JT_snakemake/results/count
@@ -56,20 +59,20 @@ cp code/AM_count_combiner/counts_all.txt code/JT_snakemake/results/count/
 cp "$INPUT_FOLDER/config/config_snakemake.yaml" code/JT_snakemake/config.yaml | true
 cp "$INPUT_FOLDER/config/config_combiner.js" code/AM_count_combiner/config.js | true
 
-  # Run snakemake code
-  pushd code/JT_snakemake > /dev/null
-  echo Running Snakemake
+# Run snakemake code
+pushd code/JT_snakemake > /dev/null
+echo Running Snakemake
 
 # Run Z-Score analysis
-  ./run.sh -r
+./run.sh -r
 
-  # Copy snakemake output
-  echo Copying Snakemake output files
+# Copy snakemake output
+echo Copying Snakemake output files
 cp results/extras/* ../../output/"$OUTDIR"/snakemake
 cp results/test/* ../../output/"$OUTDIR"/snakemake
 
 # Move back to base dir
-  popd > /dev/null
+popd > /dev/null
 popd > /dev/null
 
 echo All Done!

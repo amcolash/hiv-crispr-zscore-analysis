@@ -5,6 +5,7 @@ output*/
 *.csv
 *.txt
 *.xlsx
+*.pzfx
 
 Terminal output/
 
