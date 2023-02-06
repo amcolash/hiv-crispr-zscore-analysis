@@ -1,6 +1,6 @@
 # hiv-crispr-zscore-analysis
 
-This repository contains the code that was used to run z-score analyses for Montoya et al. 2023 [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.11.03.515041v1). There is additional code that was used in a post-processing stage that helped with preparing figures for the paper, but is not used for the z-score analysis.
+This repository contains the code that was used to run z-score analyses for Montoya et al. 2023 [(mBio)](https://journals.asm.org/doi/10.1128/mbio.00009-23). There is additional code that was used in a post-processing stage that helped with preparing figures for the paper, but is not used for the z-score analysis.
 
 ## Processing Scripts
 
